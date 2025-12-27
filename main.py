@@ -4,7 +4,12 @@ from typing import List
 
 import crud
 import schemas
-from database import SessionLocal
+import models
+from database import SessionLocal, engine
+
+
+models.Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 

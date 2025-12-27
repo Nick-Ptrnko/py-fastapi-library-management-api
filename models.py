@@ -16,7 +16,7 @@ class Book(Base):
     __tablename__ = "books"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String(255), unique=True)
+    title = Column(String(255))
     summary = Column(String)
     publication_date = Column(Date)
     author_id = Column(Integer, ForeignKey("authors.id"))
