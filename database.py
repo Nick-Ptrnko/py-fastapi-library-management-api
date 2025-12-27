@@ -1,4 +1,3 @@
-#Set up a SQLite database connection in the `database.py` file.
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base

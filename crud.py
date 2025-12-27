@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-import models, schemas
+import schemas
+import models
 
 
 def create_author(db: Session, author: schemas.AuthorCreate):
@@ -15,11 +16,16 @@ def get_authors(db: Session, skip: int = 0, limit: int = 10):
 
 
 def get_author(db: Session, author_id: int):
-    return db.query(models.Author).filter(models.Author.id == author_id).first()
+    return db.query(
+        (models.Author).filter(models.Author.id == author_id).first()
+    )
 
 
-def update_author(db: Session, author_id: int, author_data: schemas.AuthorCreate):
-    db_author = db.query(models.Author).filter(models.Author.id == author_id).first()
+def update_author(db: Session,
+                  author_id: int, author_data: schemas.AuthorCreate):
+    db_author = db.query(
+        (models.Author).filter(models.Author.id == author_id).first()
+    )
     if db_author:
         db_author.name = author_data.name
         db_author.bio = author_data.bio
@@ -29,7 +35,9 @@ def update_author(db: Session, author_id: int, author_data: schemas.AuthorCreate
 
 
 def delete_author(db: Session, author_id: int):
-    db_author = db.query(models.Author).filter(models.Author.id == author_id).first()
+    db_author = (
+        db.query(models.Author).filter(models.Author.id == author_id).first()
+    )
     if db_author:
         db.delete(db_author)
         db.commit()
@@ -54,7 +62,9 @@ def get_books(db: Session, skip: int = 0, limit: int = 10):
 
 
 def get_books_by_author(db: Session, author_id: int):
-    return db.query(models.Book).filter(models.Book.author_id == author_id).all()
+    return (
+        db.query(models.Book).filter(models.Book.author_id == author_id).all()
+    )
 
 
 def get_book(db: Session, book_id: int):

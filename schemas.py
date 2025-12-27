@@ -8,8 +8,10 @@ class BookBase(BaseModel):
     summary: str
     publication_date: date
 
+
 class BookCreate(BookBase):
     author_id: int
+
 
 class Book(BookBase):
     id: int
@@ -17,12 +19,15 @@ class Book(BookBase):
 
     model_config = ConfigDict(from_attributes=True)
 
+
 class AuthorBase(BaseModel):
     name: str
     bio: Optional[str] = None
 
+
 class AuthorCreate(AuthorBase):
     pass
+
 
 class Author(AuthorBase):
     id: int
